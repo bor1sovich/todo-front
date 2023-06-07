@@ -3,6 +3,7 @@ import { Button, Space } from "antd";
 import axios from "axios";
 
 function ControlPanel({ getTodos, setUpdateFlag, URL, onReset }) {
+
   const handleDelete = async () => {
     await axios.delete(URL);
     getTodos();
@@ -12,6 +13,7 @@ function ControlPanel({ getTodos, setUpdateFlag, URL, onReset }) {
     setUpdateFlag(false);
     onReset();
   };
+
   return (
     <Space direction="vertical" style={{ marginTop: 30 }}>
       <Button

@@ -3,6 +3,7 @@ import { Card, Button } from "antd";
 import axios from "axios";
 
 function TodoItem({ todo, setUpdateFlag, getTodos, URL, form, setUpdateId }) {
+  
   const handleUpdate = () => {
     setUpdateFlag(true);
     setUpdateId(todo.id);
@@ -20,7 +21,7 @@ function TodoItem({ todo, setUpdateFlag, getTodos, URL, form, setUpdateId }) {
       title={todo.title}
       style={{
         width: 300,
-        border: "solid black",
+        border: "solid black 1px",
         marginBottom: 15,
         marginLeft: 70,
         marginTop: 20,

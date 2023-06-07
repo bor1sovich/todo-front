@@ -4,16 +4,15 @@ import TodoItem from "./components/TodoItem";
 import axios from "axios";
 import ControlPanel from "./components/ControlPanel";
 
-const URL = "http://192.168.1.69:8080/todos";
+const URL = "http://localhost:8080/todos";
 
 function App() {
   const [form] = Form.useForm();
-  const [todoList, setTodoList] = useState([]);
+  const [todoList, setTodoList] = useState([]); 
   const [inputTitle, setInputTitle] = useState("");
   const [inputDescription, setInputDescription] = useState("");
   const [updateFlag, setUpdateFlag] = useState(false);
   const [updateId, setUpdateId] = useState(0);
-
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
@@ -23,7 +22,6 @@ function App() {
   };
 
   const handleCreate = async (todo) => {
-    // Создать новое
     if (!updateFlag) {
       await axios.post(URL, {
         title: inputTitle,
@@ -31,14 +29,13 @@ function App() {
         isCompleted: false,
       });
     } else {
-      // Изменить
       await axios.patch(URL + "/" + updateId, {
         title: inputTitle,
         description: inputDescription,
       });
+      setUpdateId(0);
     }
     onReset();
-    setUpdateId(0);
     setUpdateFlag(false);
     getTodos();
   };
@@ -47,7 +44,6 @@ function App() {
     const response = await axios.get(URL);
     setTodoList(response.data.todoList);
   }
-
   useEffect(() => {
     getTodos();
   }, []);
@@ -100,7 +96,7 @@ function App() {
               <Input
                 value={inputTitle}
                 onChange={(event) => {
-                  setInputTitle(event.target.value);
+                  setInputTitle(event.target.value); 
                 }}
               />
             </Form.Item>
@@ -119,10 +115,11 @@ function App() {
                   setInputDescription(event.target.value);
                 }}
               />
-            </Form.Item>
-
-            {!updateFlag && (
+            </Form.Item> 
+             
+             {!updateFlag && (
               <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+                
                 <Button
                   type="primary"
                   htmlType="submit"
